@@ -44,7 +44,7 @@ return new class extends Migration
             $table->morphs('entity');
         });
 
-        Schema::create('file_attached_to', function (Blueprint $table){
+        Schema::create('file_has_reference', function (Blueprint $table){
             $table->foreignId('file_id')->constrained('file')->onDelete('cascade');
             $table->foreignId('entity_reference_id')->constrained('entity_reference')->onDelete('cascade');
         });
@@ -56,6 +56,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('file_access');
+        Schema::dropIfExists('file_has_reference');
+        Schema::dropIfExists('entity_reference');
         Schema::dropIfExists('file');
     }
 };

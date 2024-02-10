@@ -10,7 +10,7 @@ use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 /**
  * Class UuidCast
  * @package SlothDevGuy\Files\Models\Casts
- * 
+ *
  * This class is responsible for casting UUID values to and from the UuidInterface object.
  */
 class UuidCast implements CastsAttributes
@@ -23,11 +23,11 @@ class UuidCast implements CastsAttributes
      * @param mixed $value The value to be converted to a UuidInterface object.
      * @param array $attributes Additional attributes (if any) that may be required for the conversion process.
      *
-     * @return UuidInterface The UuidInterface object created from the given value.
+     * @return UuidInterface|null The UuidInterface object created from the given value.
      */
-    public function get($model, string $key, mixed $value, array $attributes): UuidInterface
+    public function get($model, string $key, mixed $value, array $attributes): UuidInterface|null
     {
-        return Uuid::fromString($value);
+        return is_null($value)? $value : Uuid::fromString($value);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace SlothDevGuy\Files\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\AsCollection;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
 use SlothDevGuy\Files\Models\Casts\UuidCast;
 use SlothDevGuy\Files\Models\Traits\WithUuid;
@@ -20,6 +21,8 @@ use SlothDevGuy\Files\Models\Traits\WithUuid;
  * @property Carbon created_at
  * @property Carbon updated_at
  * @property Carbon deleted_at
+ *
+ * @property-read EntityReference[]|Collection $references
  */
 class File extends BaseModel
 {
@@ -34,4 +37,12 @@ class File extends BaseModel
         'uuid' => UuidCast::class,
         'metadata' => AsCollection::class,
     ];
+
+    /**
+     * @return BelongsToMany
+     */
+    public function references(): BelongsToMany
+    {
+        return $this->belongsToMany(EntityReference::class, 'file_has_reference');
+    }
 }

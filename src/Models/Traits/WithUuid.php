@@ -19,7 +19,7 @@ trait WithUuid
             /** @var WithUuid $model */
 
             foreach ($model->uuidColumns() as $column){
-                $model->{$column} = $model->buildUuid()->toString();
+                $model->{$column} = $model->{$column}? : $model->buildUuid()->toString();
             }
         });
     }

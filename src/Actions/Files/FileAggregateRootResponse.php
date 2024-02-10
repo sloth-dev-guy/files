@@ -2,8 +2,8 @@
 
 namespace SlothDevGuy\Files\Actions\Files;
 
+use Illuminate\Http\Response;
 use SlothDevGuy\Files\Models\File;
-use Symfony\Component\HttpFoundation\Response;
 
 trait FileAggregateRootResponse
 {
@@ -32,6 +32,7 @@ trait FileAggregateRootResponse
     {
         return array_merge($file->toArray(), [
             'uuid' => $file->uuid->toString(),
+            'references' => $file->references()->get()->toArray(),
         ]);
     }
 }
