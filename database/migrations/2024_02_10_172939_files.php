@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('path');
             $table->string('name');
             $table->string('checksum')->index();
-            $table->json('metadata');
+            $table->json('metadata')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

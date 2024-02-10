@@ -30,7 +30,7 @@ class StoreFileAction
             $file->fill($this->request->validated());
 
             $upload = $this->request->file('file');
-            $upload->store($file->path, [
+            $file->path = $upload->store($file->path, [
                 'disk' => $file->disk,
             ]);
 
