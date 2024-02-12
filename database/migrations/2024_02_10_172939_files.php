@@ -21,6 +21,7 @@ return new class extends Migration
             $table->json('metadata')->nullable();
             $table->timestamps();
             $table->softDeletes();
+            $table->timestamp('remove_at')->nullable();
 
             $table->index(['disk', 'path']);
         });

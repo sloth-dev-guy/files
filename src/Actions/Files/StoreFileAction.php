@@ -27,7 +27,7 @@ class StoreFileAction
 
         $this->file = DB::transaction(function (){
             $file = new File();
-            $file->fill($this->request->validated());
+            $file->fill($this->request->fileValues());
 
             $upload = $this->request->file('file');
             $file->path = $upload->store($file->path, [

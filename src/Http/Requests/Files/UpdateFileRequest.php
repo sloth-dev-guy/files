@@ -5,13 +5,11 @@ namespace SlothDevGuy\Files\Http\Requests\Files;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Arr;
 
-class StoreFileRequest extends FormRequest
+class UpdateFileRequest extends FormRequest
 {
     public function rules(): array
     {
         return [
-            'disk' => ['required', 'string', 'max:255'],
-            'path' => ['required', 'string', 'max:255'],
             'name' => ['required', 'string', 'max:255'],
             'metadata' => ['sometimes', 'required', 'array'],
             'references.*.uuid' => ['sometimes', 'required', 'string', 'size:36'],
@@ -26,7 +24,7 @@ class StoreFileRequest extends FormRequest
      */
     public function fileValues(): array
     {
-        return Arr::only($this->validated(), ['disk', 'path', 'name', 'metadata']);
+        return Arr::only($this->validated(), ['name', 'metadata']);
     }
 
     /**

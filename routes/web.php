@@ -12,4 +12,10 @@ Route::prefix('files')
 
         Route::get('/{file}', [FilesController::class, 'show'])->name('show');
         Route::get('/{file}/download', [FilesController::class, 'download'])->name('download');
+
+        Route::put('/{file}', [FilesController::class, 'update'])->name('update');
+        Route::put('/{file}/restore', [FilesController::class, 'restore'])->name('restore');
+
+        Route::delete('/{file}', [FilesController::class, 'delete'])->name('delete');
+        Route::delete('/{file}/destroy', [FilesController::class, 'destroy'])->name('destroy');
     });

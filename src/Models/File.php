@@ -5,8 +5,10 @@ namespace SlothDevGuy\Files\Models;
 use Carbon\Carbon;
 use Database\Factories\FileFactory;
 use Illuminate\Database\Eloquent\Casts\AsCollection;
+use Illuminate\Database\Eloquent\Concerns\HasTimestamps;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use SlothDevGuy\Files\Models\Casts\UuidCast;
 use SlothDevGuy\Files\Models\Traits\WithUuid;
@@ -23,12 +25,15 @@ use SlothDevGuy\Files\Models\Traits\WithUuid;
  * @property Carbon created_at
  * @property Carbon updated_at
  * @property Carbon deleted_at
+ * @property Carbon remove_at
  *
  * @property-read EntityReference[]|Collection $references
  */
 class File extends BaseModel
 {
     use HasFactory;
+    use HasTimestamps;
+    use SoftDeletes;
     use WithUuid;
 
     /**
@@ -39,6 +44,7 @@ class File extends BaseModel
     protected $casts = [
         'uuid' => UuidCast::class,
         'metadata' => AsCollection::class,
+        'remove_at' => 'datetime',
     ];
 
     /**
