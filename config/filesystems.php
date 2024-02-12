@@ -1,5 +1,7 @@
 <?php
 
+use League\Flysystem\GoogleCloudStorage\PortableVisibilityHandler;
+
 return [
 
     /*
@@ -56,6 +58,17 @@ return [
             'throw' => false,
         ],
 
+        'gcs' => [
+            'driver' => 'gcs',
+            'key_file_path' => env('GOOGLE_CLOUD_KEY_FILE', '/app/etc/secrets/service-account.json'),
+            'bucket' => env('GOOGLE_CLOUD_STORAGE_BUCKET', 'dev-bucket'),
+            'path_prefix' => env('GOOGLE_CLOUD_STORAGE_PATH_PREFIX', '/dev-path'),
+            'visibility' => env('GOOGLE_CLOUD_STORAGE_VISIBILITY', PortableVisibilityHandler::NO_PREDEFINED_VISIBILITY),
+            'metadata' => ['cacheControl'=> 'public,max-age=86400'], // optional: default metadata
+            //'key_file' => [], // optional: Array of data that substitutes the .json file (see below)
+            //'project_id' => env('GOOGLE_CLOUD_PROJECT_ID', 'your-project-id'), // optional: is included in key file
+            //'apiEndpoint' => env('GOOGLE_CLOUD_STORAGE_API_URI', null), // see: Public URLs below
+        ],
     ],
 
     /*
